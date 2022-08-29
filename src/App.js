@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
-import About from './components/About';
+import Basket from './components/Basket';
 
 function App() {
   return (
@@ -10,10 +10,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home/>} />
-          <Route path='/about' element={<About/>} />
+          <Route path='/basket' element={<Basket/>} />
         </Routes>
       </BrowserRouter>
-
     </div>
   );
 }

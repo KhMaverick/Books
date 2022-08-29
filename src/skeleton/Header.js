@@ -1,44 +1,53 @@
-import React, { useState } from 'react'
-// import './Header.css'
-// import { AiFillHeart, AiOutlineUser } from 'react-icons/ai';
+import React from 'react'
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
+import './style.scss';
+// mui
+import Badge from '@mui/material/Badge';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const searchData = useSelector(state=>state);
+  const searchData = useSelector(state => state.MainArray);
+  const basketD = useSelector(state => state.BasketArray);
   const dispatch = useDispatch();
-  const [inval, setInval] = useState("");
+  const navigate = useNavigate();
 
 
-  const Searching =()=>{
-    let data = searchData.filter(v=>{
-      return v.title.toLowerCase().includes(inval.toLowerCase()) || v.author.toLowerCase().includes(inval.toLowerCase());
+
+  const Searching = (val) => {
+    let data = searchData.filter(v => {
+      return v.title.toLowerCase().includes(val.toLowerCase()) || v.author.toLowerCase().includes(val.toLowerCase());
     })
-    
-    const action = { type: 'SEARCH',  payload: data}
+    const action = { type: 'SEARCH', payload: data }
     dispatch(action);
   }
-  // Searching();
+
+  const Basket = () => {
+    navigate(
+      '/basket'
+    )
+  }
 
   return (
-    <div>
-      <div className="header bg-info">
-        <div className="container">
+    <div id='head'>
+      <div className="header">
+        <div className="container w-100">
           <div className="row align-items-center">
-            <div className="col-4">
-              <h1 className='text-light'>BookSpace</h1>
+            <div className="col-lg-4 col-sm-4">
+              <Link to={'/'} id='link'>
+                <h1 className='text-light'>BookSpace</h1>
+              </Link>
             </div>
-            <div className="col-5">
-              <input className='form-control rounded-pill border-info' type="text" onInput={()=>Searching()} onChange={(v)=>setInval(v.target.value)}/>
+            <div className="col-lg-5 col-sm-7">
+              <input className='form-control rounded-pill border-info' type="text" onInput={(val) => Searching(val.target.value)} />
             </div>
-            <div className="col-2">
+            <div className="col-lg-3 col-sm-1">
               <div className="text-end">
-                <button type="button" className="btn btn-primary mt-2 rounded-circle position-relative">
-                <AiOutlineShoppingCart/>
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    +4
-                    {/* <span className="visually-hidden">Added ones</span> */}
-                  </span>
+                <button className='btn border-0' onClick={() => Basket()}>
+                  <Badge badgeContent={basketD.length} color="primary">
+                    <AiOutlineShoppingCart color="action" className='fs-3 text-light' />
+                  </Badge>
                 </button>
               </div>
             </div>

@@ -1,0 +1,22 @@
+#head {
+    height: 50px;
+    width: 100%;
+
+    .header {
+        background-color: rgb(122, 122, 253);
+        position: fixed;
+        width: 100%;
+        left: 0;
+        right: 0;
+        top: 0;
+
+        h1 {
+            color: black;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        #link {
+            text-decoration: none;
+        }
+    }
+}
